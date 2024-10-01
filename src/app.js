@@ -2,6 +2,7 @@ import express from 'express'
 import path from 'path';
 import usuariosRoutes from './routes/usuarios.routes.js'
 import indexRoutes from './routes/index.routes.js'
+import perfilRoutes from './routes/perfil.routes.js';
 
 import { fileURLToPath } from 'url';
 
@@ -21,5 +22,7 @@ app.use(express.urlencoded({ extended: true })) // Para manejar datos de formula
 // llamada a las rutas
 app.use(indexRoutes)
 app.use('/api', usuariosRoutes)
+app.use('/api', perfilRoutes)
+
 
 export default app
