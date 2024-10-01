@@ -47,22 +47,20 @@ export const getUsuario = async (req, res) => {
 
 // Crea un usuario
 export const createUsuario = async (req, res) => {
-    const{nombreUsuario, contraseña} = req.body
-    const [rows] = await pool.query('INSERT INTO usuario (nombreUsuario, contraseña) VALUES (?, ?)', [nombreUsuario, contraseña])
-    // res.send({
-    //     idUsuario: rows.insertId,
-    //     nombreUsuario,
-    //     contraseña
-    // })
-    res.redirect('/');
+    const{contraseña, nombre, apellido, email} = req.body
+    const [rows] = await pool.query('INSERT INTO usuario (contraseña, nombre, apellido, email) VALUES (?, ?, ?, ?)', [contraseña, nombre, apellido, email])
+
+    // Redirigir a la creación del perfil, pasando el ID del usuario creado
+    res.redirect(`/perfiles/create?usuarioId=${rows.insertId}`); // Usa el ID para el siguiente paso
 }
 
 // Actualiza un usuario
 export const updateUsuario = async (req, res) => {
     const {id} = req.params
-    const {nombreUsuario, contraseña} = req.body 
+    const {contraseña, nombre, apellido, email} = req.body 
 
-    const [result] = await pool.query('UPDATE usuario SET nombreUsuario = IFNULL(?, nombreUsuario), contraseña = IFNULL(?, contraseña) WHERE idUsuario = ?', [nombreUsuario, contraseña, id])
+    const [result] = await pool.query('UPDATE usuario SET nombreUsuario = contraseña = IFNULL(?, contraseña), IFNULL(?, nombre), IFNULL(?, apellido), IFNULL(?, email) WHERE idUsuario = ?', 
+        [contraseña, nombre, apellido, email, id])
 
     if(result.affectedRows <= 0) return res.status(404).json({
         message: 'Usuario not found'

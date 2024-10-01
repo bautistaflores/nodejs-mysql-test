@@ -6,7 +6,9 @@
     <thead>
         <tr>
             <th>ID</th>
-            <th>Usuario</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Email</th>
             <th>Password</th>
         </tr>
     </thead>
@@ -15,7 +17,9 @@
         <% usuarios.forEach(usuario => { %>
         <tr>
             <td><%= usuario.idUsuario %></td>
-            <td><%= usuario.nombreUsuario %></td>
+            <td><%= usuario.nombre %></td>
+            <td><%= usuario.apellido %></td>
+            <td><%= usuario.email %></td>
             <td><%= usuario.contraseña %></td>
         </tr>
         <% }) %>

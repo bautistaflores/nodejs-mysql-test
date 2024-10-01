@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: true })) // Para manejar datos de formula
 // llamada a las rutas
 app.use(indexRoutes)
 app.use('/api', usuariosRoutes)
-app.use('/api', perfilRoutes)
+app.use('/perfiles', perfilRoutes)
 
 
 export default app

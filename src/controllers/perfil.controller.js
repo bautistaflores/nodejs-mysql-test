@@ -1,13 +1,19 @@
 import {pool} from '../db.js'
 
+// Funcion para mostrar el formulario de creacion de perfil
+export const showCreatePerfilForm = (req, res) => {
+    const usuarioId = req.query.usuarioId; // Obtener el ID del usuario de la consulta de la URL
+    res.render('perfiles/createPerfil', { usuarioId }); // Pasar el ID del usuario a la vista
+};
+
 // Crea un nuevo perfil
 export const createPerfil = async (req, res) => {
-    const { descripcion, valoracionPromedio, telefono, email, nombre, apellido, fechaNacimiento, Usuario_idUsuario } = req.body;
+    const { descripcion, valoracionPromedio, telefono, fechaNacimiento, usuarioId } = req.body;
     const [rows] = await pool.query(
-        'INSERT INTO perfil (descripcion, valoracionPromedio, telefono, email, nombre, apellido, fechaNacimiento, Usuario_idUsuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', 
-        [descripcion, valoracionPromedio, telefono, email, nombre, apellido, fechaNacimiento, Usuario_idUsuario])
+        'INSERT INTO perfil (descripcion, valoracionPromedio, telefono, fechaNacimiento, Usuario_idUsuario) VALUES (?, ?, ?, ?, ?)', 
+        [descripcion, valoracionPromedio, telefono, fechaNacimiento, usuarioId])
 
-        res.redirect('/api/perfiles/create');
+        res.redirect('/');
 };
 
 // Devuelve todos los perfiles
@@ -23,10 +29,8 @@ export const getPerfiles = async (req, res) => {
 
 // Devuelve un perfil por ID
 export const getPerfil = async (req, res) => {
-    const { id } = req.params;
-    
     try {
-        const [rows] = await pool.query('SELECT * FROM perfil WHERE idPerfil = ?', [id]);
+        const [rows] = await pool.query('SELECT * FROM perfil WHERE idPerfil = ?', [req.params.id]);
         
         if (rows.length <= 0) {
             return res.status(404).json({ message: 'Perfil no encontrado' });
