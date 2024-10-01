@@ -1,10 +1,38 @@
 import {pool} from '../db.js'
 
 // Devuelve todos los usuarios
-export const getUsuarios = async (req, res) => {
+export const getUsuarios = async (req, res, asData = false) => {
     const [rows] = await pool.query('SELECT * FROM usuario')
-    res.send(rows)
+    
+    if (asData) {
+        return rows; // Retorna los usuarios en lugar de enviar JSON
+    }
+
+    res.json(rows);
+
+    // res.send(rows)
 }
+
+/** para q funcione api/usuarios */
+// // Devuelve todos los usuarios o los renderiza en caso de que se le indique
+// export const getUsuarios = async (req, res, jsonResponse = false) => {
+//     try {
+//         const [rows] = await pool.query('SELECT * FROM usuario');
+        
+//         // Si queremos una respuesta JSON
+//         if (jsonResponse) {
+//             return rows; // Devuelve la lista de usuarios
+//         }
+        
+//         // Renderiza la vista si jsonResponse es false
+//         res.render('index', { usuarios: rows });
+//     } catch (error) {
+//         console.error(error);
+//         return res.status(500).json({ message: 'Error al obtener usuarios' });
+//     }
+// };
+
+
 
 // Devuelve un usuario por ID
 export const getUsuario = async (req, res) => {
@@ -26,7 +54,7 @@ export const createUsuario = async (req, res) => {
     //     nombreUsuario,
     //     contraseña
     // })
-    res.redirect('/api/usuarios/create');
+    res.redirect('/');
 }
 
 // Actualiza un usuario
