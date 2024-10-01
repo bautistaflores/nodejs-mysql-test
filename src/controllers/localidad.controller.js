@@ -2,10 +2,10 @@ import {pool} from '../db.js'
 
 // Crea una nueva provincia
 export const createLocalidad = async (req, res) => {
-    const { nombre, provinciaId } = req.body;
+    const { nombre, provinciaId, perfilId } = req.body;
     const [rows] = await pool.query(
-        'INSERT INTO localidad (nombre, Provincia_idProvincia) VALUES (?, ?)', 
-        [nombre, provinciaId])
+        'INSERT INTO localidad (nombre, Provincia_idProvincia, Perfil_idPerfil) VALUES (?, ?)', 
+        [nombre, provinciaId, perfilId])
 
         res.redirect('/');
 };

@@ -1,6 +1,6 @@
 <%- include('../partials/_header'); %>
 
-<h1>Crear Usuario</h1>
+<h1>Crear Perfil</h1>
     <form action="/perfiles/create" method="POST">
         <label for="descripcion">Descripción:</label>
         <input type="text" id="descripcion" name="descripcion" required>
@@ -21,7 +21,7 @@
         <!-- Campo oculto para el ID del usuario -->
         <input type="hidden" name="usuarioId" value="<%= usuarioId %>"> <!-- Aquí se pasa el ID del usuario -->
 
-        <button type="submit">Crear Usuario</button>
+        <button type="submit">Crear Perfil</button>
     </form>
 
 <%- include('../partials/_footer'); %>
