@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Usuario</title>
+</head>
+<body>
+    <h1>Crear Usuario</h1>
+    <form action="/api/usuarios/create" method="POST">
+        <label for="nombreUsuario">Nombre de Usuario:</label>
+        <input type="text" id="nombreUsuario" name="nombreUsuario" required>
+        <br>
+        <label for="contraseña">Contraseña:</label>
+        <input type="password" id="contraseña" name="contraseña" required>
+        <br>
+        <button type="submit">Crear Usuario</button>
+    </form>
+</body>
+</html>

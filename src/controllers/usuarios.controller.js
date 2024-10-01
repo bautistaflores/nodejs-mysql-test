@@ -1,4 +1,3 @@
-
 import {pool} from '../db.js'
 
 // Devuelve todos los usuarios
@@ -22,11 +21,12 @@ export const getUsuario = async (req, res) => {
 export const createUsuario = async (req, res) => {
     const{nombreUsuario, contraseña} = req.body
     const [rows] = await pool.query('INSERT INTO usuario (nombreUsuario, contraseña) VALUES (?, ?)', [nombreUsuario, contraseña])
-    res.send({
-        idUsuario: rows.insertId,
-        nombreUsuario,
-        contraseña
-    })
+    // res.send({
+    //     idUsuario: rows.insertId,
+    //     nombreUsuario,
+    //     contraseña
+    // })
+    res.redirect('/api/usuarios/create');
 }
 
 // Actualiza un usuario

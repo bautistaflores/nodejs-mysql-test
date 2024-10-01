@@ -3,11 +3,16 @@ import { getUsuarios, getUsuario, createUsuario, updateUsuario, deleteUsuario } 
 
 const router = Router()
 
+// Ruta para mostrar el formulario de creación de usuario
+router.get('/usuarios/create', (req, res) => {
+    res.render('usuarios/createUsuario'); 
+});
+// Ruta para manejar la creación de un nuevo usuario
+router.post('/usuarios/create', createUsuario);
+
 router.get('/usuarios', getUsuarios)
 
 router.get('/usuarios/:id', getUsuario)
-
-router.post('/usuarios', createUsuario)
 
 router.patch('/usuarios/:id', updateUsuario)
 
